@@ -42,5 +42,26 @@ public class TaskScheduler {
         }
     }
 
+    public void showData(){
+        for(Process current: processes){
+
+            System.out.println(current.getName());
+            try {
+                System.out.println(current.getAddressSpace().toString());
+            } catch (NullPointerException ignore){
+                System.out.println("Unable to get data");
+            }
+        }
+    }
+
+    public String getData(){
+        StringBuilder data = new StringBuilder();
+        for(Process current: processes){
+            data.append(current.getName() + "\n");
+            data.append(current.getAddressSpace().toString() + "\n");
+        }
+        return data.toString();
+    }
+
 
 }

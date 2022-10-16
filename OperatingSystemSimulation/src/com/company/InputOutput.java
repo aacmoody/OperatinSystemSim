@@ -50,9 +50,25 @@ public class InputOutput implements Runnable {
         } else if(userInput.equals("help")) {
             printHelp();
         } else if(userInput.contains("web ")){
-
             networkInterface.pingWeb(userInput.split(" ")[1]);
-        } else{
+        } else if(userInput.equals("show")) {
+            Kernel.showData();
+        } else if(userInput.contains("save ")){
+            String fileName = userInput.split(" ")[1];
+            if(fileName.length() > 0) {
+                Kernel.saveData(fileName);
+            } else{
+                System.out.println("Need file name");
+            }
+        } else if(userInput.contains("read ")){
+            String fileName = userInput.split(" " )[1];
+            if(fileName.length() > 0){
+                Kernel.readData(fileName);
+            }else{
+                System.out.println("Need file name");
+            }
+        }
+        else{
             System.out.println("Command not understood, see help:");
             printHelp();
         }
@@ -64,5 +80,7 @@ public class InputOutput implements Runnable {
         System.out.println("start 'newName'\t\tto create new process");
         System.out.println("proc\t\t\t\tto view running process");
         System.out.println("web 'site'\t\t\tto call a website");
+        System.out.println("show\t\t\t\tshow data in address space");
+        System.out.println("save 'location'\t\t\tsave all process data to file");
     }
 }

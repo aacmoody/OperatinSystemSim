@@ -14,7 +14,7 @@ public class Kernel {
     private static Processor processor;
     private static TaskScheduler taskScheduler;
     private static ExecutorService executorService;
-
+    private static MemoryManager memoryManager;
 
     public static void main(String[] args){
         System.out.println("Kernel Running");
@@ -23,7 +23,7 @@ public class Kernel {
 
         io = new InputOutput();
         processor = new Processor();
-
+        memoryManager = new MemoryManager();
 
         taskScheduler = new TaskScheduler(processor);
         startingProcesses(); //Start 3 initial process for the Kernel to run
@@ -51,9 +51,9 @@ public class Kernel {
     }
 
     public static void startingProcesses(){
-        Process p1 = new Process("Process1");
-        Process p2 = new Process("Process2");
-        Process p3 = new Process("Process3");
+        Process p1 = new Process("Process1", memoryManager.getBlock());
+        Process p2 = new Process("Process2", memoryManager.getBlock());
+        Process p3 = new Process("Process3", memoryManager.getBlock());
         taskScheduler.addProcess(p1);
         taskScheduler.addProcess(p2);
         taskScheduler.addProcess(p3);
@@ -61,8 +61,12 @@ public class Kernel {
     }
 
     public static void userCreateProcess(String name){
-        taskScheduler.addProcess(new Process(name));
+        taskScheduler.addProcess(new Process(name, memoryManager.getBlock()));
 
+    }
+
+    public static void showData(){
+        taskScheduler.showData();
     }
 
     public static void addLog(String line){
@@ -80,4 +84,11 @@ public class Kernel {
         taskScheduler.printProcesses();
     }
 
+    public static void saveData(String fileName){
+        StorageManager.saveData(fileName, taskScheduler.getData());
+    }
+
+    public static void readData(String fileName){
+        StorageManager.readData(fileName);
+    }
 }

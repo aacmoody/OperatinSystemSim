@@ -6,8 +6,10 @@ public class Process {
 
     private StringBuilder addressSpace;
 
-    public Process(String name ){
+    public Process(String name, StringBuilder allocatedMemory ){
         this.name = name;
+        this.addressSpace = allocatedMemory;
+        //        this.addressSpace = new StringBuilder();
     }
 
 
@@ -16,12 +18,9 @@ public class Process {
     }
 
 
-    /*
-    public boolean checkAddressSpace(){
-        //If we have exceeded our address space we need to request more
-       return (addressSpace.length() > 1000)?  false:  true;
+    public void setAddressSpace(StringBuilder memory){
+        addressSpace = memory;
     }
-     */
 
     public StringBuilder getAddressSpace(){
         return addressSpace;
