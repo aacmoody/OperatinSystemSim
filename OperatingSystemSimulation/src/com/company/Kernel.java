@@ -37,21 +37,20 @@ public class Kernel {
                 Thread.sleep(1000);
                 processManager.switchProcess();
 
-            }catch (Exception e){
-
+            }catch (Exception ignore){
             }
-
         }
         System.out.println("Shutting down operating system simulation");
         System.out.println("Printing process logs");
-        printLog();
+        SHUTDOWN();
+//        printLog();
         executorService.shutdown();
     }
 
     public static void SHUTDOWN(){
         io.setSHUTDOWN();
         processor.setSHUTDOWN();
-        SHUTDOWN=true;
+        //SHUTDOWN=true;
     }
 
     public static void startingProcesses(){
@@ -74,6 +73,7 @@ public class Kernel {
     }
 
     public static void printLog(){
+        System.out.println(kernelProcessLogs.size());
         for(String current: kernelProcessLogs){
             System.out.println(current);
         }

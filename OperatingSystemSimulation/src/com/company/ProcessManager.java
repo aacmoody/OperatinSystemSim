@@ -36,7 +36,7 @@ public class ProcessManager {
     }
 
     public void printProcesses(){
-        System.out.println("Number of Processes running: " + activeProcess);
+        System.out.println("Number of Processes running: " + processes.size());
         for(Process current: processes){
             System.out.println(current.getName());
         }

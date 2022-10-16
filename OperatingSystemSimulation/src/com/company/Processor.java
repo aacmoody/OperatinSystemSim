@@ -27,19 +27,21 @@ public class Processor implements Runnable {
     @Override
     public void run() {
         System.out.println("Processor is ready");
-        while(!SHUTDOWN){
+        while(!this.SHUTDOWN){
                  //System.out.println("Running process: " + currentProcess.getName());
 
 
             //Add random character to memory block to represent new work?
             //Thread.Sleep(10);
 
+
         }
+        System.out.println("Stopping Processor");
     }
 
 
     public void setSHUTDOWN(){
-        SHUTDOWN = true;
+        this.SHUTDOWN = true;
     }
 
 
