@@ -18,8 +18,6 @@ public class Processor implements Runnable {
         Kernel.addLog("Pausing " + oldProcess.getName() + " at time" + System.currentTimeMillis() +
                 "\nStarting " + newProcess.getName() + " at time " + System.currentTimeMillis() + "\n");
 
-        //System.out.println("Pausing " + oldProcess.getName() + " at time" + System.currentTimeMillis());
-        //System.out.println("Starting " + newProcess.getName() + " at time " + System.currentTimeMillis());
 
         return oldProcess;
     }

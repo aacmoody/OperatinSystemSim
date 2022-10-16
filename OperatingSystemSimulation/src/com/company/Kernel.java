@@ -12,8 +12,8 @@ public class Kernel {
     private static boolean SHUTDOWN = false;
     private static InputOutput io;
     private static Processor processor;
-    private static ProcessManager processManager;
-    //ExecutorService executorService;
+    private static TaskScheduler taskScheduler;
+    private static ExecutorService executorService;
 
 
     public static void main(String[] args){
@@ -25,46 +25,43 @@ public class Kernel {
         processor = new Processor();
 
 
-        processManager = new ProcessManager(processor);
+        taskScheduler = new TaskScheduler(processor);
         startingProcesses(); //Start 3 initial process for the Kernel to run
 
-        ExecutorService executorService = Executors.newCachedThreadPool();
+        executorService = Executors.newCachedThreadPool();
         executorService.execute(io);
         executorService.execute(processor);
 
         while (!SHUTDOWN){
             try {
                 Thread.sleep(1000);
-                processManager.switchProcess();
+                taskScheduler.switchProcess();
 
             }catch (Exception ignore){
             }
         }
         System.out.println("Shutting down operating system simulation");
         System.out.println("Printing process logs");
-        SHUTDOWN();
-//        printLog();
+
         executorService.shutdown();
     }
 
     public static void SHUTDOWN(){
-        io.setSHUTDOWN();
-        processor.setSHUTDOWN();
-        //SHUTDOWN=true;
+        System.exit(0);
     }
 
     public static void startingProcesses(){
         Process p1 = new Process("Process1");
         Process p2 = new Process("Process2");
         Process p3 = new Process("Process3");
-        processManager.addProcess(p1);
-        processManager.addProcess(p2);
-        processManager.addProcess(p3);
+        taskScheduler.addProcess(p1);
+        taskScheduler.addProcess(p2);
+        taskScheduler.addProcess(p3);
 
     }
 
     public static void userCreateProcess(String name){
-        processManager.addProcess(new Process(name));
+        taskScheduler.addProcess(new Process(name));
 
     }
 
@@ -80,7 +77,7 @@ public class Kernel {
     }
 
     public static void printProcesses(){
-        processManager.printProcesses();
+        taskScheduler.printProcesses();
     }
 
 }

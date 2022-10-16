@@ -2,14 +2,14 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class ProcessManager {
+public class TaskScheduler {
 
     private Processor systemProcessor;
 
     ArrayList<Process> processes;
     private int activeProcess = 0;
 
-    public ProcessManager(Processor systemProcessor){
+    public TaskScheduler(Processor systemProcessor){
         this.systemProcessor = systemProcessor;
         processes = new ArrayList<>();
     }
