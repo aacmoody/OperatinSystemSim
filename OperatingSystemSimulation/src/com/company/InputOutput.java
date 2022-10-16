@@ -37,7 +37,7 @@ public class InputOutput implements Runnable {
         userInput = userInput.toLowerCase().trim();
         if(userInput.equals("log") || userInput.equals("logs") ){
             Kernel.printLog();
-        } else if(userInput.contains("start")){
+        } else if(userInput.contains("start ")){
             String processName = userInput.replace("start ", "");
             if(processName.length() > 0) {
                 Kernel.userCreateProcess(processName);
@@ -45,10 +45,13 @@ public class InputOutput implements Runnable {
             } else {
                 System.out.println("Enter a process to start");
             }
-        } else if(userInput.contains("proc")){
+        } else if(userInput.equals("proc")){
             Kernel.printProcesses();
-        } else if(userInput.contains("help")){
+        } else if(userInput.equals("help")) {
             printHelp();
+        } else if(userInput.contains("web ")){
+
+            networkInterface.pingWeb(userInput.split(" ")[1]);
         } else{
             System.out.println("Command not understood, see help:");
             printHelp();
@@ -60,5 +63,6 @@ public class InputOutput implements Runnable {
         System.out.println("log\t\t\t\t\tto show process logs");
         System.out.println("start 'newName'\t\tto create new process");
         System.out.println("proc\t\t\t\tto view running process");
+        System.out.println("web 'site'\t\t\tto call a website");
     }
 }
