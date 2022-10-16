@@ -6,7 +6,6 @@ import java.util.concurrent.Executors;
 
 public class Kernel {
 
-
     private static ArrayList<String> kernelProcessLogs;
 
     private static boolean SHUTDOWN = false;
@@ -74,7 +73,7 @@ public class Kernel {
     }
 
     public static void printLog(){
-        System.out.println(kernelProcessLogs.size());
+        System.out.println("\n" + kernelProcessLogs.size());
         for(String current: kernelProcessLogs){
             System.out.println(current);
         }
